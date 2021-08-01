@@ -1,15 +1,8 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-# Raspberry Pi to Arduino I2C Communication
-#i2cdetect -y 1
-#library
 import sys
-import smbus2 as smbus #,smbus2
+import smbus2 as smbus 
 import time
 # Slave Addresses
-I2C_SLAVE_ADDRESS = 11 #0x0b ou 11
-I2C_SLAVE2_ADDRESS = 12
-I2C_SLAVE3_ADDRESS = 13
+I2C_SLAVE_ADDRESS = 11 #0x0b - 11
 
 # This function converts a string to an array of bytes.
 def ConvertStringsToBytes(src):
@@ -22,24 +15,14 @@ def main(args):
     # Create the I2C bus
     I2Cbus = smbus.SMBus(1)
     with smbus.SMBus(1) as I2Cbus:
-        slaveSelect = input("Which Arduino (1-3): ")
-        cmd = input("Enter command: ")
-        if slaveSelect == "1":
-            slaveAddress = I2C_SLAVE_ADDRESS
-        elif slaveSelect == "2":
-            slaveAddress = I2C_SLAVE2_ADDRESS
-        elif slaveSelect == "3":
-            slaveAddress = I2C_SLAVE3_ADDRESS
-        else:
-            # quit if you messed up
-            print(slaveSelect== "1")
-            print(type(slaveSelect))
-            print("no slave selected")
-            quit()
-        BytesToSend = ConvertStringsToBytes(cmd)
-        print("Sent " + str(slaveAddress) + " the " + str(cmd) + " command.")
+        slaveAddress = I2C_SLAVE_ADDRESS
+
+        BytesToSend = ConvertStringsToBytes("3,45,90")
+        print("Sent " + str(slaveAddress) + " the " + str("3,45,90") + " command.")
         print(BytesToSend )
+
         I2Cbus.write_i2c_block_data(slaveAddress, 0x00, BytesToSend)
+        
         time.sleep(0.5)
         while True:
             try:
