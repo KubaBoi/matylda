@@ -29,6 +29,7 @@ def main(args):
                 data=I2Cbus.read_i2c_block_data(slaveAddress,0x00,16)
                 print("recieve from slave:")
                 print(data)
+                I2Cbus.write_i2c_block_data(slaveAddress, 0x00, BytesToSend)
             except:
                 print("remote i/o error")
                 time.sleep(0.5)
