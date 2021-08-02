@@ -24,7 +24,7 @@ while True:
     try:
         writeData("1,45,90")  
         time.sleep(5)
-        writeData("1,45,0")
+        writeData("1,90,0")
         time.sleep(5)
     except Exception as e:
         print("Arduino " + str(address) + " disconnected")
