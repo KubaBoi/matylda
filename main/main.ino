@@ -2,7 +2,7 @@
 #include <Wire.h>
 #include "AnimationManager.h"
 
-# define I2C_SLAVE_ADDRESS 11
+# define I2C_SLAVE_ADDRESS 0x04
 #define PAYLOAD_SIZE 2
 
 AnimationManager manager(1);
@@ -47,4 +47,6 @@ void receiveEvents(int numBytes)
   Serial.println(F("bytes recieved"));
   Serial.print(F("recieved value : "));
   Serial.println(n);
+  Serial.print("string: ");
+  Serial.println(String(n));
 }

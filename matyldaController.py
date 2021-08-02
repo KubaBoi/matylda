@@ -1,44 +1,33 @@
-import sys
-import smbus2 as smbus 
+# -*- coding: utf-8 -*-
+import smbus2
 import time
-# Slave Addresses
-I2C_SLAVE_ADDRESS = 11 #0x0b - 11
+# for RPI version 1, use bus = smbus.SMBus(0)
+bus = smbus2.SMBus(1)
 
-# This function converts a string to an array of bytes.
-def ConvertStringsToBytes(src):
-  converted = []
-  for b in src:
-    converted.append(ord(b))
-  return converted
+# This is the address we setup in the Arduino Program
+address = 0x04
 
-def main(args):
-    # Create the I2C bus
-    I2Cbus = smbus.SMBus(1)
-    with smbus.SMBus(1) as I2Cbus:
-        slaveAddress = I2C_SLAVE_ADDRESS
-
-        BytesToSend = ConvertStringsToBytes("3,45,90")
-        print("Sent " + str(slaveAddress) + " the " + str("3,45,90") + " command.")
-        print(BytesToSend )
-
-        I2Cbus.write_i2c_block_data(slaveAddress, 0x00, BytesToSend)
-        
-        time.sleep(0.5)
-        while True:
-            try:
-                data=I2Cbus.read_i2c_block_data(slaveAddress,0x00,16)
-                print("recieve from slave:")
-                print(data)
-                I2Cbus.write_i2c_block_data(slaveAddress, 0x00, BytesToSend)
-            except:
-                print("remote i/o error")
-                time.sleep(0.5)
-    return 0
+def writeData(value):
+    byteValue = StringToBytes(value)    
+    bus.write_i2c_block_data(address,0x00,byteValue) #first byte is 0=command byte.. just is.
+    return -1
 
 
-if __name__ == '__main__':
-     try:
-        main(sys.argv)
-     except KeyboardInterrupt:
-        print("program was stopped manually")
-     input()
+def StringToBytes(val):
+        retVal = []
+        for c in val:
+                retVal.append(ord(c))
+        return retVal
+
+while True:
+    print("sending")
+    writeData("test")   
+    time.sleep(5)
+
+    print('OPEN');
+    writeData("OPEN-00-00")
+    time.sleep(7)
+
+    print('WIN');
+    writeData("WIN-12-200")
+    time.sleep(7)
