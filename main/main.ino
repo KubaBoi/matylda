@@ -5,6 +5,10 @@
 # define I2C_SLAVE_ADDRESS 0x04
 #define PAYLOAD_SIZE 2
 
+volatile boolean receiveFlag = false;
+char temp[32];
+String command;
+
 AnimationManager manager(1);
 
 void setup()
@@ -23,30 +27,57 @@ void setup()
 
 void loop()
 {
-  //manager.runManager();
+  manager.runManager();
   //manager.getActualAngle(4);
   
   //delay(100);
+
+  if (receiveFlag == true) {
+    Serial.println(temp);
+    setMove();
+    receiveFlag = false;
+  }
 }
 
-int n = 0;
+void setMove() {
+  String c = String(temp);
+  int servo = getValue(c,',',0);
+  int duration = getValue(c,',',1);
+  int finalAngle = getValue(c,',',2);
+  manager.setMove(servo, duration, finalAngle);
+}
 
-void requestEvents()
+int getValue(String data, char separator, int index)
 {
-  Serial.println(F("---> recieved request"));
-  Serial.print(F("sending value : "));
-  Serial.println(n);
-  Wire.write(n);
+  int found = 0;
+  int strIndex[] = {0, -1};
+  int maxIndex = data.length()-1;
+
+  for(int i=0; i<=maxIndex && found<=index; i++){
+    if(data.charAt(i)==separator || i==maxIndex){
+        found++;
+        strIndex[0] = strIndex[1]+1;
+        strIndex[1] = (i == maxIndex) ? i+1 : i;
+    }
+  }
+
+  return (found>index ? data.substring(strIndex[0], strIndex[1]) : "").toInt();
 }
 
-void receiveEvents(int numBytes)
-{  
-  Serial.println(F("---> recieved events"));
-  n = Wire.read();
-  Serial.print(numBytes);
-  Serial.println(F("bytes recieved"));
-  Serial.print(F("recieved value : "));
-  Serial.println(n);
-  Serial.print("string: ");
-  Serial.println(String(n));
+void requestEvents(int message) {
+  Wire.write(message);
+}
+
+void receiveEvents(int howMany) {
+
+  for (int i = 0; i < howMany; i++) {
+    temp[i] = Wire.read();
+    temp[i + 1] = '\0'; //add null after ea. char
+  }
+
+  //RPi first byte is cmd byte so shift everything to the left 1 pos so temp contains our string
+  for (int i = 0; i < howMany; ++i)
+    temp[i] = temp[i + 1];
+
+  receiveFlag = true;
 }

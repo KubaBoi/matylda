@@ -22,4 +22,6 @@ def StringToBytes(val):
 while True:
     print("sending")
     writeData("1,45,90")  
-    time.sleep(1)
+    time.sleep(10)
+    writeData("1,45,0")
+    time.sleep(10)
