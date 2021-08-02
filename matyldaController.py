@@ -16,12 +16,11 @@ def writeData(value):
 def StringToBytes(val):
         retVal = []
         for c in val:
-                retVal.append(ord(c))
+            retVal.append(ord(c))
         return retVal
 
 while True:
-    print("sending")
     writeData("1,45,90")  
-    time.sleep(10)
+    time.sleep(5)
     writeData("1,45,0")
-    time.sleep(10)
+    time.sleep(5)

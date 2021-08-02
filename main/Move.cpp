@@ -3,7 +3,6 @@
 Move::Move() {}
 
 void Move::setUp(int duration, int finalAngle) {
-  //Servo servo;
   _duration = duration;
   _finalAngle = finalAngle;
   _step = (finalAngle - servo.read()) / duration;
@@ -22,6 +21,7 @@ void Move::tick() {
 }
 
 void Move::attachServo(int pin) {
+  _pin = pin;
   servo.attach(pin);
 }
 
@@ -53,5 +53,5 @@ void Move::setAngle(int value) {
 }
 
 void Move::printServoInfo() {
-  Serial.println("Servo angle: " + String(servo.read()));
+  Serial.println("Servo: " + String(_pin) + " angle: " + String(servo.read()));
 }

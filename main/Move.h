@@ -6,6 +6,7 @@
 
 class Move {
   private:
+    int _pin;
     int _duration;
     int _finalAngle;
     int _step;
