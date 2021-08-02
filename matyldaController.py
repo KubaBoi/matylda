@@ -8,9 +8,10 @@ bus = smbus2.SMBus(1)
 address = 0x04
 
 def writeData(value):
-    print("Sending" + value)
     byteValue = StringToBytes(value)    
     bus.write_i2c_block_data(address,0x00,byteValue) #first byte is 0=command byte.. just is.
+
+    print("Sending: " + value)
 
 
 def StringToBytes(val):
