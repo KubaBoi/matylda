@@ -36,7 +36,7 @@ bool Move::isActive() {
 
 void Move::addAngle(int value) {
   printServoInfo();
-  Serial.println("Adding: " + String(value));
+  Serial.println(" Adding: " + String(value));
   int stat = servo.read() + value;
   servo.write(stat);
 
@@ -45,7 +45,7 @@ void Move::addAngle(int value) {
 }
 void Move::setAngle(int value) {
   printServoInfo();
-  Serial.println("Setting: " + String(value));
+  Serial.println(" Setting: " + String(value));
   servo.write(value);
 
   digitalWrite(13, LOW);
