@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 import smbus2
 import time
+import pigpio;
 # for RPI version 1, use bus = smbus.SMBus(0)
 bus = smbus2.SMBus(1)
 
@@ -25,5 +26,5 @@ while True:
         time.sleep(5)
         writeData("1,45,0")
         time.sleep(5)
-    except Exception as e:
+    except pigpio.error as e:
         print(e)
