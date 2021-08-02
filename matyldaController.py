@@ -21,13 +21,5 @@ def StringToBytes(val):
 
 while True:
     print("sending")
-    writeData("test")   
-    time.sleep(5)
-
-    print('OPEN');
-    writeData("OPEN-00-00")
-    time.sleep(7)
-
-    print('WIN');
-    writeData("WIN-12-200")
-    time.sleep(7)
+    writeData("1,45,90")  
+    time.sleep(1)
