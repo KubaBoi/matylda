@@ -53,5 +53,5 @@ void Move::setAngle(int value) {
 }
 
 void Move::printServoInfo() {
-  Serial.println("Servo: " + String(_pin) + " angle: " + String(servo.read()));
+  Serial.print("Servo: " + String(_pin) + " angle: " + String(servo.read()));
 }

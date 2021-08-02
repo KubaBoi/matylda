@@ -20,7 +20,10 @@ def StringToBytes(val):
         return retVal
 
 while True:
-    writeData("1,45,90")  
-    time.sleep(5)
-    writeData("1,45,0")
-    time.sleep(5)
+    try:
+        writeData("1,45,90")  
+        time.sleep(5)
+        writeData("1,45,0")
+        time.sleep(5)
+    except Exception as e:
+        print(e)
