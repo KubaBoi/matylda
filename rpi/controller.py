@@ -27,10 +27,18 @@ def main():
 
 # function pcaScenario 
 def pcaScenario():
-    pca.servo[0].angle = 40
-    pca.servo[1].angle = 40
-    pca.servo[2].angle = 40
-
+    """Scenario to test servo"""
+    for i in range(nbPCAServo):
+        for j in range(MIN_ANG[i],MAX_ANG[i],1):
+            print("Send angle {} to Servo {}".format(j,i))
+            pca.servo[i].angle = j
+            time.sleep(0.1)
+        for j in range(MAX_ANG[i],MIN_ANG[i],-1):
+            print("Send angle {} to Servo {}".format(j,i))
+            pca.servo[i].angle = j
+            time.sleep(0.1)
+        pca.servo[i].angle=None #disable channel
+        time.sleep(0.5)
 
 if __name__ == '__main__':
     init()
