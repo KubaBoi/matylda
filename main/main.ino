@@ -16,13 +16,12 @@ void setup()
   Wire.begin(I2C_SLAVE_ADDRESS);
   Serial.begin(9600); 
   delay(1000);               
-  Wire.onRequest(requestEvents);
+  //Wire.onRequest(requestEvents);
   Wire.onReceive(receiveEvents);
   
   pinMode(13, OUTPUT);
 
-  manager.setUp(3); 
-  manager.setMove(1, 90, 90);
+  manager.setUp(3);
 }
 
 void loop()
@@ -33,7 +32,7 @@ void loop()
   //delay(100);
 
   if (receiveFlag == true) {
-    Serial.println(temp);
+    Serial.println("Recieved: " + String(temp));
     setMove();
     receiveFlag = false;
   }
@@ -64,9 +63,9 @@ int getValue(String data, char separator, int index)
   return (found>index ? data.substring(strIndex[0], strIndex[1]) : "").toInt();
 }
 
-void requestEvents(int message) {
+/*void requestEvents(int message) {
   Wire.write(message);
-}
+}*/
 
 void receiveEvents(int howMany) {
 

@@ -13,7 +13,7 @@ void AnimationManager::setUp(int del) {
   _movesCount = 0;
 
   for (int i = 0; i < SERVOCOUNT; i++) {
-    moves[i].attachServo(i+2);
+    moves[i].attachServo(pins[i]);
     moves[i].setAngle(0);
   }
 }

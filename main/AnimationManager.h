@@ -7,13 +7,14 @@
 
 class AnimationManager {
   public:
-    int SERVOCOUNT = 16;
+    int SERVOCOUNT = 6;
     int MAXMOVES = 20;
 
     int _delay;
     int _movesCount;
     
-    Move moves[16];
+    int pins[6] = {3, 5, 6, 9, 10, 11};
+    Move moves[6];
     
     AnimationManager(int i);
     

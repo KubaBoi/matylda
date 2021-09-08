@@ -10,7 +10,7 @@ class Move {
     int _duration;
     int _finalAngle;
     int _step;
-    bool _active;
+    bool _active = false;
   
   public:
     Servo servo;

@@ -9,13 +9,19 @@ void Move::setUp(int duration, int finalAngle) {
   _active = true;
 }
 
+//lerp - linearni interpolace
+// p = p1 + (p2 - p1)xU
 void Move::tick() {
   if (isActive()) {
     if (servo.read() == _finalAngle) {
+      printServoInfo();
+      Serial.println(" STOP");
       _active = false;
+      digitalWrite(13, LOW);
     }
     else {
       addAngle(_step);
+      digitalWrite(13, HIGH);
     } 
   }
 }
@@ -39,17 +45,11 @@ void Move::addAngle(int value) {
   Serial.println(" Adding: " + String(value));
   int stat = servo.read() + value;
   servo.write(stat);
-
-  digitalWrite(13, LOW);
-  digitalWrite(13, HIGH);
 }
 void Move::setAngle(int value) {
   printServoInfo();
   Serial.println(" Setting: " + String(value));
   servo.write(value);
-
-  digitalWrite(13, LOW);
-  digitalWrite(13, HIGH);
 }
 
 void Move::printServoInfo() {
