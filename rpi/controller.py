@@ -32,11 +32,11 @@ def pcaScenario():
         for j in range(MIN_ANG[i],MAX_ANG[i],1):
             print("Send angle {} to Servo {}".format(j,i))
             pca.servo[i].angle = j
-            time.sleep(0.1)
+            time.sleep(0.05)
         for j in range(MAX_ANG[i],MIN_ANG[i],-1):
             print("Send angle {} to Servo {}".format(j,i))
             pca.servo[i].angle = j
-            time.sleep(0.1)
+            time.sleep(0.05)
         pca.servo[i].angle=None #disable channel
         time.sleep(0.5)
 
