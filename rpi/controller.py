@@ -27,9 +27,9 @@ def main():
 
 # function pcaScenario 
 def pcaScenario():
-    pca.servo[0].angle = 90
-    pca.servo[1].angle = 180
-    pca.servo[2].angle = 75
+    pca.servo[0].angle = 40
+    pca.servo[1].angle = 40
+    pca.servo[2].angle = 40
 
 
 if __name__ == '__main__':
