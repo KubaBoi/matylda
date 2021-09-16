@@ -7,8 +7,8 @@ class Server:
         pass
 
     def start(self):
-        HOST = ""  # Standard loopback interface address (localhost)
-        PORT = 65432        # Port to listen on (non-privileged ports are > 1023)
+        HOST = ""
+        PORT = 65432
 
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         s.bind((HOST, PORT))
@@ -25,9 +25,29 @@ class Server:
                     if not data:
                         break
 
-                    r = '{ "name":"John", "age":30, "city":"New York"}'
-                    print(r)
-                    conn.sendall(bytes(json.dumps(r), "utf-8"))
+                    """
+                    moves[]:
+                        type[str]:
+                            m - set move
+                            s - set angle
+                            g - get angle
+                        servo[int]: index
+                        speed[float]: (0, 1>
+                        finalAngle[int]: <0, 180>
+                    """
+
+                    moves = []
+
+                    answer = {}
+                    answer["type"] = "m"
+                    answer["servo"] = 0
+                    answer["speed"] = 0.1
+                    answer["finalAngle"] = 180
+
+                    moves.append(answer)
+
+                    print(moves)
+                    conn.sendall(bytes(json.dumps(moves), "utf-8"))
 
             except Exception as e:
                 print("Disconnected by", addr)

@@ -30,8 +30,16 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         s.sendall(b"1")
         recieved = s.recv(1024)
         decoded = recieved.decode("utf-8")
-        data = json.loads(decoded)
-        print(data)
+        moves = json.loads(decoded)
+        
+        for m in moves:
+            serv = servos[m["servo"]]
+            
+            if (m["type"] == "m"):
+                serv.setMove(m["speed"], m["finalAngle"])
+            elif (m["type"] == "s"):
+                serv.setAngle(m["finalAngle"])
+
 
         for servo in servos:
             servo.tick()
