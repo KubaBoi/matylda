@@ -4,4 +4,4 @@ from servoController import ServoController
 controller = ServoController(16)
 server = Server(controller)
 
-server.start()
+server.serveForever()

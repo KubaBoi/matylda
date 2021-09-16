@@ -16,8 +16,9 @@ class ServoController:
         print("Initialized")
         
     def tick(self):
-        for servo in self.servos:
-            servo.tick()
+        while self.allUnactive():
+            for servo in self.servos:
+                servo.tick()
 
     def setMove(self, servoIndex, speed, finalAngle):
         self.servos[servoIndex].setMove(speed, finalAngle)
@@ -27,3 +28,9 @@ class ServoController:
 
     def getAngle(self, servoIndex):
         return self.servos[servoIndex].getAngle()
+
+    def allUnactive(self):
+        for servo in self.servos:
+            if (servo.isActive()):
+                return False
+        return True
