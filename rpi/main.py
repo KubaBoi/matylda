@@ -13,11 +13,11 @@ for i in range(servoCount):
     pca.servo[i].set_pulse_width_range(500, 2500)
     
     servos.append(Servo(pca.servo[i], i))
-    servos[i].setAngle(0)
+    servos[i].setAngle(1)
 
 print("Initialized")
 
-servos[0].setMove(0.1, 180)
+servos[3].setMove(0.1, 180)
 
 #run
 while True:
