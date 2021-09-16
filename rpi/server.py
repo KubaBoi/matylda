@@ -28,12 +28,13 @@ class Server:
         print("Running...")
 
     def serverThread(self, s):
+        conn, addr = s.accept()
+        self.print_lock.acquire()
+        print("Connected by", addr)
+        i = 0
+
         while True:
             try:
-                conn, addr = s.accept()
-                self.print_lock.acquire()
-                print("Connected by", addr)
-                i = 0
                 while True:
                     data = conn.recv(1024)
                     if not data:
