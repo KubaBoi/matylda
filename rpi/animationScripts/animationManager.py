@@ -1,7 +1,7 @@
 import json
 
-from animation import Animation
-from animationStep import AnimationStep
+from animationScripts.animation import Animation
+from animationScripts.animationStep import AnimationStep
 
 class AnimationManager:
     def __init__(self, servoController):
