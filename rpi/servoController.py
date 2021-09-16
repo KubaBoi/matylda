@@ -26,4 +26,4 @@ class ServoController:
         self.servos[servoIndex].setAngle(angle)
 
     def getAngle(self, servoIndex):
-        self.servos[servoIndex].getAngle()
+        return self.servos[servoIndex].getAngle()

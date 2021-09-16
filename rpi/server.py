@@ -72,9 +72,9 @@ class Server:
                 print(str(e))
                 i += 1
 
-                s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-                s.bind((self.HOST, self.PORT))
-                s.listen(5)
+                #s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                #s.bind((self.HOST, self.PORT))
+                #s.listen(5)
                 conn, addr = s.accept()
                 print("Connected by", addr)
 
