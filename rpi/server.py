@@ -18,8 +18,6 @@ class Server:
         print("Connected by", addr)
         i = 0
 
-        self.down = False
-
         while True:
             try:
                 while True:
