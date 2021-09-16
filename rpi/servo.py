@@ -5,6 +5,7 @@ class Servo:
     def __init__(self, servo, pin):
         self.servo = servo
         self.pin = pin
+        self.active = False
 
     #speed (0, 1>
     #finalAngle <0, 180>
@@ -47,4 +48,4 @@ class Servo:
         self.servo.angle = value
 
     def printServoInfo(self, comment=""):
-        print(f"Servo: {self.pin} angle: {self.getAngle} {comment}") 
+        print(f"Servo: {self.pin} angle: {self.getAngle()} {comment}") 
