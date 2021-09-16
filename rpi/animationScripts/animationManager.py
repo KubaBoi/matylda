@@ -44,9 +44,3 @@ class AnimationManager:
                     cont = True
 
             if (cont): break
-
-controller = ServoController(16)
-anMan = AnimationManager(controller)
-
-with open("rpi/requests/animation.json", "r", encoding="utf-8") as f:
-    anMan.createAnimation(json.loads(f.read()))
