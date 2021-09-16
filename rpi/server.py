@@ -71,6 +71,7 @@ class Server:
             self.controller.tick()
 
         elif (type == "a"):
+            print("ANIMATION")
             self.animationManager.createAnimation(request)
             self.animationManager.runAnimation()
 
