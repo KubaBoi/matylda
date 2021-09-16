@@ -20,6 +20,7 @@ class Server:
 
         while True:
             try:
+                i = 0
                 while True:
                     data = conn.recv(1024)
                     if not data:
@@ -28,6 +29,7 @@ class Server:
                     """
                     moves[]:
                         type[str]:
+                            n - nothing 
                             m - set move
                             s - set angle
                             g - get angle

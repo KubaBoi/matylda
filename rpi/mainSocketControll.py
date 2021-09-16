@@ -33,6 +33,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         moves = json.loads(decoded)
         
         for m in moves:
+            if (m["type"] == "n"): continue
             serv = servos[m["servo"]]
             
             if (m["type"] == "m"):
