@@ -16,7 +16,7 @@ class ServoController:
         print("Initialized")
         
     def tick(self):
-        while self.allUnactive():
+        while not self.allUnactive():
             for servo in self.servos:
                 servo.tick()
 
