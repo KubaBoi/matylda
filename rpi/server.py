@@ -4,8 +4,6 @@ from adafruit_servokit import ServoKit
 import json
 import socket
 
-from servoController import ServoController
-
 class Server:
     def __init__(self, servoController):
         self.controller = servoController
@@ -65,6 +63,4 @@ class Server:
                 s.listen(5)
                 conn, addr = s.accept()
                 print("Connected by", addr)
-
-    def doMoves(self):
 
