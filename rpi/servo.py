@@ -2,23 +2,49 @@
 # -*- coding: utf-8 -*-
 
 class Servo:
-    def __init__(self, pin):
+    def __init__(self, servo, pin):
+        self.servo = servo
         self.pin = pin
 
+    #speed (0, 1>
+    #finalAngle <0, 180>
+    def setUp(self, speed, finalAngle):
+        self.active = True
+        
+        self.oldAngle = self.getAngle()
+        self.finalAngle = finalAngle
+        
+        self.time = 0 # move time
+        self.speed = speed
+
     def tick(self):
-        pass
+        if (self.isActive()):
+            if (self.getAngle() == self.finalAngle):
+                print("STOP")
+
+                self.printServoInfo("")
+                self.active = False
+
+            else:
+                self.time += self.speed
+
+    def lerp(self):
+        return round((1 - self.time) * self.oldAngle + self.time * self.finalAngle)
 
     def isActive(self):
-        pass
+        return self.active
 
     def getAngle(self):
-        pass
+        return round(self.servo.angle)
 
     def addAngle(self, value):
-        pass
+        self.printServoInfo(f"Adding: {value}")
+        val = self.getAngle() + value
+        self.servo.angle = val
 
     def setAngle(self, value):
-        pass
+        self.printServoInfo(f"Setting: {value}")
+        self.servo.angle = value
 
-    def printServoInfo(self):
-        
+    def printServoInfo(self, comment):
+        print(f"Servo: {self.pin} angle: {self.getAngle} {comment}") 
