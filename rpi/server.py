@@ -44,27 +44,9 @@ class Server:
                     decoded = data.decode("utf-8")
                     requests = json.loads(decoded) # array of recieved requests
 
-                    answer = [] # answer in case of "g"
-                    
-                    for m in requests:
-                        type = m["type"]
-                        index = m["servo"]
-                        speed = m["speed"]
-                        angle = m["finalAngle"]
-                        
-                        if (type == "m"): # set move
-                            self.controller.setMove(index, speed, angle)
-                        elif (type == "s"): # set angle
-                            self.controller.setAngle(index, angle)
-                        elif (type == "g"): # get angle
-                            get = {}
-                            get["servo"] = index
-                            get["angle"] = self.controller.getAngle(index)
-                            answer.append(get)
-
+                    answer = self.readRequests(requests)
                     
                     conn.sendall(bytes(json.dumps(answer), "utf-8"))
-                conn.close()
 
             except Exception as e:
                 print("Disconnected by", addr)
@@ -72,4 +54,25 @@ class Server:
                 print("Waiting...")
                 conn, addr = s.accept()
                 print("Connected by", addr)
+
+    def readRequests(self, requests):
+        answer = [] # answer in case of "g"
+                    
+        for m in requests:
+            type = m["type"]
+            index = m["servo"]
+            speed = m["speed"]
+            angle = m["finalAngle"]
+            
+            if (type == "m"): # set move
+                self.controller.setMove(index, speed, angle)
+            elif (type == "s"): # set angle
+                self.controller.setAngle(index, angle)
+            elif (type == "g"): # get angle
+                get = {}
+                get["servo"] = index
+                get["angle"] = self.controller.getAngle(index)
+                answer.append(get)
+
+        return answer
 
