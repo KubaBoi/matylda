@@ -21,8 +21,7 @@ class Servo:
     def tick(self):
         if (self.isActive()):
             if (self.getAngle() == self.finalAngle):
-                self.printServoInfo()
-                print("STOP")
+                self.printServoInfo("STOP")
                 self.active = False
 
             else:
