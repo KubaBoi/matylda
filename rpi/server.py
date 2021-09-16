@@ -40,7 +40,7 @@ class Server:
                         angle = m["finalAngle"]
                         
                         if (type == "m"): # set move
-                            self.controller.serv.setMove(index, speed, angle)
+                            self.controller.setMove(index, speed, angle)
                         elif (type == "s"): # set angle
                             self.controller.setAngle(index, angle)
                         elif (type == "g"): # get angle
