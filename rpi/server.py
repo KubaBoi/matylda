@@ -68,13 +68,8 @@ class Server:
 
             except Exception as e:
                 print("Disconnected by", addr)
-                print(str(i) + ": ")
                 print(str(e))
-                i += 1
-
-                #s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-                #s.bind((self.HOST, self.PORT))
-                #s.listen(5)
+                print("Waiting...")
                 conn, addr = s.accept()
                 print("Connected by", addr)
 
