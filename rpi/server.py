@@ -9,13 +9,19 @@ class Server:
     def __init__(self, servoController):
         self.controller = servoController
 
-    def update(self):
-        self.controller.tick() # update servos
-
     def start(self):
         servoRunThread = threading.Thread(target=self.update)
         servoRunThread.start()
+        print("Threading servos")
 
+        serverRunThread = threading.Thread(target=self.startServer)
+        serverRunThread.start()
+        print("Threading server")
+
+    def update(self):
+        self.controller.tick() # update servos
+
+    def startServer():
         HOST = ""
         PORT = 55573
 
