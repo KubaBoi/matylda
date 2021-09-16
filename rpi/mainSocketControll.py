@@ -1,8 +1,6 @@
 import time
 from adafruit_servokit import ServoKit
 import json
-from tkinter.constants import NONE
-import pyautogui
 import socket
 
 from servo import Servo
