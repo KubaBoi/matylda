@@ -11,7 +11,7 @@ class ServoController:
             pca.servo[i].set_pulse_width_range(500, 2500)
             
             self.servos.append(Servo(pca.servo[i], i))
-            self.servos[i].setAngle(1)
+            self.servos[i].setAngle(180)
 
         print("Initialized")
         
