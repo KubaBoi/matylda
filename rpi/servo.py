@@ -8,7 +8,7 @@ class Servo:
 
     #speed (0, 1>
     #finalAngle <0, 180>
-    def setUp(self, speed, finalAngle):
+    def setMove(self, speed, finalAngle):
         self.active = True
         
         self.oldAngle = self.getAngle()
@@ -20,12 +20,12 @@ class Servo:
     def tick(self):
         if (self.isActive()):
             if (self.getAngle() == self.finalAngle):
+                self.printServoInfo()
                 print("STOP")
-
-                self.printServoInfo("")
                 self.active = False
 
             else:
+                self.setAngle(self.lerp())
                 self.time += self.speed
 
     def lerp(self):
@@ -46,5 +46,5 @@ class Servo:
         self.printServoInfo(f"Setting: {value}")
         self.servo.angle = value
 
-    def printServoInfo(self, comment):
+    def printServoInfo(self, comment=""):
         print(f"Servo: {self.pin} angle: {self.getAngle} {comment}") 
