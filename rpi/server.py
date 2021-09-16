@@ -3,12 +3,19 @@ import time
 from adafruit_servokit import ServoKit
 import json
 import socket
+import threading
 
 class Server:
     def __init__(self, servoController):
         self.controller = servoController
 
+    def update(self):
+        self.controller.tick() # update servos
+
     def start(self):
+        servoRunThread = threading.Thread(target=self.update)
+        servoRunThread.start()
+
         HOST = ""
         PORT = 55573
 
@@ -24,7 +31,6 @@ class Server:
             try:
                 while True:
                     data = conn.recv(1024)
-                    self.controller.tick() # update servos
                     print("tick")
                     if not data:
                         break
