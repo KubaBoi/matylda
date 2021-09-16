@@ -43,4 +43,4 @@ class AnimationManager:
                 if (not animation.done):
                     cont = True
 
-            if (cont): break
+            if (not cont): break
