@@ -19,7 +19,6 @@ class Server:
         print("Running...")
 
         conn, addr = s.accept()
-        self.print_lock.acquire()
         print("Connected by", addr)
         i = 0
 
