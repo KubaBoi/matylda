@@ -9,34 +9,35 @@ print_lock = threading.Lock()
   
 # thread function
 def threaded(s):
-    # establish connection with client
-    c, addr = s.accept()
-
-    # lock acquired by client
-    print_lock.acquire()
-    print('Connected to :', addr[0], ':', addr[1])
-
-    # Start a new thread and return its identifier
-
     while True:
-  
-        # data received from client
-        data = c.recv(1024)
-        if not data:
-            print('Bye')
-              
-            # lock released on exit
-            print_lock.release()
-            break
-  
-        # reverse the given string from client
-        data = data[::-1]
-  
-        # send back reversed string to client
-        c.send(data)
-  
-    # connection closed
-    c.close()
+        # establish connection with client
+        c, addr = s.accept()
+
+        # lock acquired by client
+        print_lock.acquire()
+        print('Connected to :', addr[0], ':', addr[1])
+
+        # Start a new thread and return its identifier
+
+        while True:
+    
+            # data received from client
+            data = c.recv(1024)
+            if not data:
+                print('Bye')
+                
+                # lock released on exit
+                print_lock.release()
+                break
+    
+            # reverse the given string from client
+            data = data[::-1]
+    
+            # send back reversed string to client
+            c.send(data)
+    
+        # connection closed
+        c.close()
   
   
 def Main():
@@ -54,11 +55,10 @@ def Main():
     s.listen(5)
     print("socket is listening")
   
+    start_new_thread(threaded, (s,))
     # a forever loop until client wants to exit
     while True:
-        print(threading.active_count())
-        if (threading.active_count() < 2):
-            start_new_thread(threaded, (s,))
+        print("ahoj")
 
     s.close()
   

@@ -12,12 +12,9 @@ class Server:
         self.startServer()
 
     def start(self):
+        start_new_thread(self.serverThread, (self.s,))
         while True:
             self.controller.tick() # update servos
-
-            if (threading.active_count() < 2):
-                start_new_thread(self.serverThread, (self.s,))
-                print(threading.active_count())
 
     def startServer(self):
         self.print_lock = threading.Lock()
