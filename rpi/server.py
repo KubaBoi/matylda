@@ -5,8 +5,9 @@ import json
 import socket
 
 class Server:
-    def __init__(self, servoController):
+    def __init__(self, servoController, animationManager):
         self.controller = servoController
+        self.animationManager = animationManager
 
     def serveForever(self):
 
@@ -33,10 +34,8 @@ class Server:
                     request = json.loads(decoded) # array of recieved requests
 
                     answer = self.readRequests(request)
-                    
-                    conn.sendall(bytes(json.dumps(answer), "utf-8"))
 
-                    self.controller.tick()
+                    conn.sendall(bytes(json.dumps(answer), "utf-8"))
 
             except Exception as e:
                 print("Disconnected by", addr)
@@ -69,8 +68,11 @@ class Server:
                     get["angle"] = self.controller.getAngle(index)
                     answer.append(get)
 
+            self.controller.tick()
+
         elif (type == "a"):
-            pass
+            self.animationManager.createAnimation(request)
+            self.animationManager.runAnimation()
 
         return answer
 

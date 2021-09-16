@@ -4,7 +4,25 @@
         {
             "servo": 0,
             "moves": [
-                
+                {
+                    "type": "m",
+                    "speed": 0.1,
+                    "finalAngle": 150
+                },
+                {
+                    "type": "w",
+                    "duration": 10
+                },
+                {
+                    "type": "wu",
+                    "servo": 1,
+                    "angle": 5
+                },
+                {
+                    "type": "m",
+                    "speed": 0.01,
+                    "finalAngle": 10
+                }
             ]
         }
     ]

@@ -34,3 +34,6 @@ class ServoController:
             if (servo.isActive()):
                 return False
         return True
+
+    def getServo(self, servoIndex):
+        return self.servos[servoIndex]
