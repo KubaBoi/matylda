@@ -7,7 +7,6 @@ import socket
 class Server:
     def __init__(self, servoController):
         self.controller = servoController
-        self.startServer()
 
     def serveForever(self):
 
