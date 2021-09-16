@@ -1,6 +1,6 @@
 
 class AnimationStep:
-    def __init__(self, type, speed=0, angle=0, duration=0, otherServo=-1):
+    def __init__(self, type, speed=None, angle=None, duration=None, otherServo=None):
         self.type = type
         self.speed = speed
         self.angle = angle
