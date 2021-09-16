@@ -16,6 +16,7 @@ class ServoController:
         print("Initialized")
         
     def tick(self):
+        print("tick")
         for servo in self.servos:
             servo.tick()
 

@@ -31,7 +31,6 @@ class Server:
             try:
                 while True:
                     data = conn.recv(1024)
-                    print("tick")
                     if not data:
                         break
 
