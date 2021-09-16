@@ -10,7 +10,7 @@ class Server:
 
     def start(self):
         HOST = ""
-        PORT = 65432
+        PORT = 55573
 
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         s.bind((HOST, PORT))
@@ -29,24 +29,24 @@ class Server:
                         break
 
                     decoded = data.decode("utf-8")
-                    moves = json.loads(decoded) # array of recieved moves
+                    requests = json.loads(decoded) # array of recieved requests
 
                     answer = [] # answer in case of "g"
                     
-                    for m in moves:
+                    for m in requests:
                         type = m["type"]
-                        serv = m["servo"]
+                        index = m["servo"]
                         speed = m["speed"]
                         angle = m["finalAngle"]
                         
                         if (type == "m"): # set move
-                            self.controller.serv.setMove(serv, speed, angle)
+                            self.controller.serv.setMove(index, speed, angle)
                         elif (type == "s"): # set angle
-                            self.controller.setAngle(serv, angle)
+                            self.controller.setAngle(index, angle)
                         elif (type == "g"): # get angle
                             get = {}
-                            get["servo"] = serv
-                            get["angle"] = self.controller.getAngle(serv)
+                            get["servo"] = index
+                            get["angle"] = self.controller.getAngle(index)
                             answer.append(get)
 
                     
