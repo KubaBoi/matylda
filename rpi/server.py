@@ -21,7 +21,7 @@ class Server:
     def update(self):
         self.controller.tick() # update servos
 
-    def startServer():
+    def startServer(self):
         HOST = ""
         PORT = 55573
 
