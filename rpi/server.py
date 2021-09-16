@@ -25,7 +25,7 @@ class Server:
                     if not data:
                         break
 
-                    r = "data"
+                    r = '{ "name":"John", "age":30, "city":"New York"}'
                     print(r)
                     conn.sendall(bytes(json.dumps(r), "utf-8"))
 

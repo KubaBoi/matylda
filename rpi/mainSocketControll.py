@@ -30,7 +30,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         s.sendall(b"1")
         recieved = s.recv(1024)
         decoded = recieved.decode("utf-8")
-        data = decoded
+        data = json.loads(decoded)
         print(data)
 
         for servo in servos:
