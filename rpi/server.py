@@ -1,10 +1,14 @@
 #!/usr/bin/env python3
-import socket
+import time
+from adafruit_servokit import ServoKit
 import json
+import socket
+
+from servoController import ServoController
 
 class Server:
-    def __init__(self):
-        pass
+    def __init__(self, servoController):
+        self.controller = servoController
 
     def start(self):
         HOST = ""
@@ -20,36 +24,35 @@ class Server:
 
         while True:
             try:
-                i = 0
                 while True:
                     data = conn.recv(1024)
+                    self.controller.tick() # update servos
                     if not data:
                         break
 
-                    """
-                    moves[]:
-                        type[str]:
-                            n - nothing 
-                            m - set move
-                            s - set angle
-                            g - get angle
-                        servo[int]: index
-                        speed[float]: (0, 1>
-                        finalAngle[int]: <0, 180>
-                    """
+                    decoded = data.decode("utf-8")
+                    moves = json.loads(decoded) # array of recieved moves
 
-                    moves = []
+                    answer = [] # answer in case of "g"
+                    
+                    for m in moves:
+                        type = m["type"]
+                        serv = m["servo"]
+                        speed = m["speed"]
+                        angle = m["finalAngle"]
+                        
+                        if (type == "m"): # set move
+                            self.controller.serv.setMove(serv, speed, angle)
+                        elif (type == "s"): # set angle
+                            self.controller.setAngle(serv, angle)
+                        elif (type == "g"): # get angle
+                            get = {}
+                            get["servo"] = serv
+                            get["angle"] = self.controller.getAngle(serv)
+                            answer.append(get)
 
-                    answer = {}
-                    answer["type"] = "m"
-                    answer["servo"] = 0
-                    answer["speed"] = 0.1
-                    answer["finalAngle"] = 180
-
-                    moves.append(answer)
-
-                    print(moves)
-                    conn.sendall(bytes(json.dumps(moves), "utf-8"))
+                    
+                    conn.sendall(bytes(json.dumps(answer), "utf-8"))
 
             except Exception as e:
                 print("Disconnected by", addr)
@@ -62,7 +65,6 @@ class Server:
                 s.listen(5)
                 conn, addr = s.accept()
                 print("Connected by", addr)
-    
 
-touchPad = Server()
-touchPad.start()
+    def doMoves(self):
+
