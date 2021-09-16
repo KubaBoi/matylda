@@ -56,9 +56,10 @@ def Main():
   
     # a forever loop until client wants to exit
     while True:
-        start_new_thread(threaded, (s,))
+        print(threading.active_count())
+        if (threading.active_count() < 2):
+            start_new_thread(threaded, (s,))
 
-        print("ahoj")
     s.close()
   
   
