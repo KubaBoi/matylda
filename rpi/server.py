@@ -51,18 +51,19 @@ class Server:
         type = request["type"] # a/m
 
         if (type == "m"):
-            moves = request["requests"] # list of moves
+            requests = request["requests"] # list of moves
             
-            for m in moves:
-                index = m["servo"]
-                speed = m["speed"]
-                angle = m["finalAngle"]
+            for r in requests:
+                req_type = r["type"]
+                index = r["servo"]
+                speed = r["speed"]
+                angle = r["finalAngle"]
                 
-                if (type == "m"): # set move
+                if (req_type == "m"): # set move
                     self.controller.setMove(index, speed, angle)
-                elif (type == "s"): # set angle
+                elif (req_type == "s"): # set angle
                     self.controller.setAngle(index, angle)
-                elif (type == "g"): # get angle
+                elif (req_type == "g"): # get angle
                     get = {}
                     get["servo"] = index
                     get["angle"] = self.controller.getAngle(index)
