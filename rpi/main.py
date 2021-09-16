@@ -15,6 +15,8 @@ for i in range(servoCount):
     servos.append(Servo(pca.servo[i], i))
     servos[i].setAngle(0)
 
+print("Initialized")
+
 servos[0].setMove(0.1, 180)
 
 #run
