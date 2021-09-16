@@ -25,6 +25,7 @@ class Server:
                 while True:
                     data = conn.recv(1024)
                     self.controller.tick() # update servos
+                    print("tick")
                     if not data:
                         break
 

@@ -6,31 +6,33 @@ PORT = 55573        # The port used by the server
 
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     s.connect((HOST, PORT))
-    #while True:
-    """
-    moves[]:
-        type[str]:
-            m - set move
-            s - set angle
-            g - get angle
-        servo[int]: index
-        speed[float]: (0, 1>
-        finalAngle[int]: <0, 180>
-    """
+    while True:
+        """
+        moves[]:
+            type[str]:
+                m - set move
+                s - set angle
+                g - get angle
+            servo[int]: index
+            speed[float]: (0, 1>
+            finalAngle[int]: <0, 180>
+        """
 
-    requests = []
+        inp = input("type,servo,speed,angle: ").split(",")
 
-    data = {}
-    data["type"] = "m"
-    data["servo"] = 0
-    data["speed"] = 0.1
-    data["finalAngle"] = 180
+        requests = []
 
-    requests.append(data)
+        data = {}
+        data["type"] = inp[0]
+        data["servo"] = int(inp[1])
+        data["speed"] = float(inp[2])
+        data["finalAngle"] = int(inp[3])
 
-    print(requests)
+        requests.append(data)
 
-    s.sendall(bytes(json.dumps(requests), "utf-8"))
-    recieved = s.recv(1024)
-    decoded = recieved.decode("utf-8")
-    print(decoded)
+        print(requests)
+
+        s.sendall(bytes(json.dumps(requests), "utf-8"))
+        recieved = s.recv(1024)
+        decoded = recieved.decode("utf-8")
+        print(decoded)
