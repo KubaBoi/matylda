@@ -1,0 +1,25 @@
+
+type(str): a/m
+m - single moves:
+    requests[]:
+        type(str):
+            m - set move
+            s - set angle
+            g - get angle
+        servo(int): index
+        speed(float): (0, 1>
+        finalAngle(int): <0, 180>
+
+a - animation:
+    servos[]:
+        servo(int): index
+        moves[]:
+            type(str):
+                m - set move:
+                    speed(float): (0, 1>
+                    finalAngle(int): <0, 180>
+                w - wait:
+                    duration(int): ticks
+                wu - wait until
+                    servo(int): index of waited servo
+                    angle(int): angle of waited servo

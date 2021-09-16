@@ -7,32 +7,37 @@ PORT = 55573        # The port used by the server
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     s.connect((HOST, PORT))
     while True:
-        """
-        moves[]:
-            type[str]:
-                m - set move
-                s - set angle
-                g - get angle
-            servo[int]: index
-            speed[float]: (0, 1>
-            finalAngle[int]: <0, 180>
-        """
+        #m,0,0.01,150|m,1,0.01,150|m,2,0.01,150|g,0,0,0|g,1,0,0|g,2,0,0
 
-        inp = input("type,servo,speed,angle: ").split(",")
+        inp = input("type,servo,speed,angle: ")
 
-        requests = []
+        request = {}
 
-        data = {}
-        data["type"] = inp[0]
-        data["servo"] = int(inp[1])
-        data["speed"] = float(inp[2])
-        data["finalAngle"] = int(inp[3])
+        if (inp[0] != "a"):
+            request["type"] = "m"
+            request["requests"] = []
+            reqs = inp.split("|")
 
-        requests.append(data)
+            for r in reqs:
+                req = r.split(",")
 
-        print(requests)
+                data = {}
+                data["type"] = req[0]
+                data["servo"] = int(req[1])
+                data["speed"] = float(req[2])
+                data["finalAngle"] = int(req[3])
 
-        s.sendall(bytes(json.dumps(requests), "utf-8"))
+                request["requests"].append(data)
+        else:
+            animationPath = inp.split(" ")[1]
+            with open(f"./rpi/requests/{animationPath}.json", "r", encoding="utf-8") as f:
+                request = json.loads(f.read())
+
+
+
+        print(request)
+
+        s.sendall(bytes(json.dumps(request), "utf-8"))
         recieved = s.recv(1024)
         decoded = recieved.decode("utf-8")
         print(decoded)

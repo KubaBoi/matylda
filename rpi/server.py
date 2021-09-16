@@ -30,9 +30,9 @@ class Server:
                         break
 
                     decoded = data.decode("utf-8")
-                    requests = json.loads(decoded) # array of recieved requests
+                    request = json.loads(decoded) # array of recieved requests
 
-                    answer = self.readRequests(requests)
+                    answer = self.readRequests(request)
                     
                     conn.sendall(bytes(json.dumps(answer), "utf-8"))
 
@@ -45,24 +45,31 @@ class Server:
                 conn, addr = s.accept()
                 print("Connected by", addr)
 
-    def readRequests(self, requests):
+    def readRequests(self, request):
         answer = [] # answer in case of "g"
                     
-        for m in requests:
-            type = m["type"]
-            index = m["servo"]
-            speed = m["speed"]
-            angle = m["finalAngle"]
+        type = request["type"] # a/m
+
+        if (type == "m"):
+            moves = request["requests"] # list of moves
             
-            if (type == "m"): # set move
-                self.controller.setMove(index, speed, angle)
-            elif (type == "s"): # set angle
-                self.controller.setAngle(index, angle)
-            elif (type == "g"): # get angle
-                get = {}
-                get["servo"] = index
-                get["angle"] = self.controller.getAngle(index)
-                answer.append(get)
+            for m in moves:
+                index = m["servo"]
+                speed = m["speed"]
+                angle = m["finalAngle"]
+                
+                if (type == "m"): # set move
+                    self.controller.setMove(index, speed, angle)
+                elif (type == "s"): # set angle
+                    self.controller.setAngle(index, angle)
+                elif (type == "g"): # get angle
+                    get = {}
+                    get["servo"] = index
+                    get["angle"] = self.controller.getAngle(index)
+                    answer.append(get)
+
+        elif (type == "a"):
+            pass
 
         return answer
 

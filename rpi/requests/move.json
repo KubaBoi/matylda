@@ -1,0 +1,41 @@
+{
+    "type": "m",
+    "requests": [
+        {
+            "type": "m",
+            "servo": 0,
+            "speed": 0.01,
+            "finalAngle": 150
+        },
+        {
+            "type": "m",
+            "servo": 1,
+            "speed": 0.01,
+            "finalAngle": 150
+        },
+        {
+            "type": "m",
+            "servo": 2,
+            "speed": 0.01,
+            "finalAngle": 150
+        },
+        {
+            "type": "g",
+            "servo": 0,
+            "speed": 0.01,
+            "finalAngle": 150
+        },
+        {
+            "type": "g",
+            "servo": 1,
+            "speed": 0.01,
+            "finalAngle": 150
+        },
+        {
+            "type": "g",
+            "servo": 2,
+            "speed": 0.01,
+            "finalAngle": 150
+        }
+    ]
+}
