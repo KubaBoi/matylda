@@ -41,7 +41,7 @@ class Animation:
         return True
 
     def doWait(self, step):
-        self.servo.printServoInfo(f"Waiting for {step.duration} ticks")
+        self.servo.printServoInfo(f"Waiting for {step.runTime}/{step.duration} ticks")
 
         if (step.runTime < step.duration):
             return False
