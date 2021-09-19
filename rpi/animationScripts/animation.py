@@ -14,6 +14,7 @@ class Animation:
         if (self.done): return # animation is all done
 
         step = self.steps[self.step]
+        step.runTime += 1
 
         if (step.type == "m"):
             stepDone = self.doMove(step)
@@ -23,7 +24,6 @@ class Animation:
             stepDone = self.doWaitUntil(step)
 
         self.oldStep = step
-        step.runTime += 1
 
         if (stepDone):
             self.step += 1
