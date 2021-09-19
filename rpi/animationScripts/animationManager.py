@@ -40,6 +40,8 @@ class AnimationManager:
             self.animationManager.createAnimation(data)
             self.animationManager.runAnimation()
 
+        return answer
+
     def createAnimation(self, data):
         self.animations = []
 
