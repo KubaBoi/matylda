@@ -11,7 +11,7 @@ class ServoController:
             pca.servo[i].set_pulse_width_range(500, 2500)
             
             self.servos.append(Servo(pca.servo[i], i))
-            self.testServo(i)
+            self.servos[i].setAngle(5)
 
         print("Initialized")
         
@@ -19,15 +19,6 @@ class ServoController:
         while not self.allUnactive():
             for servo in self.servos:
                 servo.tick()
-
-    def testServo(self, index):
-        self.setAngle(index, 5)
-        ang = self.getAngle(index)
-        print(ang)
-        if (ang < 300):
-            print(f"Servo {index} is OK")
-        else:
-            print(f"Servo {index} is NOT OK")
 
 
     def setMove(self, servoIndex, speed, finalAngle):
