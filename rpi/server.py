@@ -23,7 +23,7 @@ class Server:
                 break
             except Exception as e:
                 print("Connection is old. Turn of controll script.")
-                time.sleep(1000)
+                time.sleep(2)
 
 
         conn, addr = s.accept()
