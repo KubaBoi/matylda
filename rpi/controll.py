@@ -36,9 +36,9 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
 
 
 
-        print(request)
+        print(f"Request: {request}")
 
         s.sendall(bytes(json.dumps(request), "utf-8"))
         recieved = s.recv(1024)
         decoded = recieved.decode("utf-8")
-        print(decoded)
+        print(f"Response: {decoded}")

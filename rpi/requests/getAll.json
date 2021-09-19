@@ -1,0 +1,69 @@
+{
+    "type": "m",
+    "requests": [
+        {
+            "type": "g",
+            "servo": 0
+        },
+        {
+            "type": "g",
+            "servo": 1
+        },
+        {
+            "type": "g",
+            "servo": 2
+        },
+        {
+            "type": "g",
+            "servo": 3
+        },
+        {
+            "type": "g",
+            "servo": 4
+        },
+        {
+            "type": "g",
+            "servo": 5
+        },
+        {
+            "type": "g",
+            "servo": 6
+        },
+        {
+            "type": "g",
+            "servo": 7
+        },
+        {
+            "type": "g",
+            "servo": 8
+        },
+        {
+            "type": "g",
+            "servo": 9
+        },
+        {
+            "type": "g",
+            "servo": 10
+        },
+        {
+            "type": "g",
+            "servo": 11
+        },
+        {
+            "type": "g",
+            "servo": 12
+        },
+        {
+            "type": "g",
+            "servo": 13
+        },
+        {
+            "type": "g",
+            "servo": 14
+        },
+        {
+            "type": "g",
+            "servo": 15
+        }
+    ]
+}

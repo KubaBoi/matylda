@@ -1,0 +1,101 @@
+{
+    "type": "m",
+    "requests": [
+        {
+            "type": "m",
+            "servo": 0,
+            "speed": 1,
+            "finalAngle": 5
+        },
+        {
+            "type": "m",
+            "servo": 1,
+            "speed": 1,
+            "finalAngle": 5
+        },
+        {
+            "type": "m",
+            "servo": 2,
+            "speed": 1,
+            "finalAngle": 5
+        },
+        {
+            "type": "m",
+            "servo": 3,
+            "speed": 1,
+            "finalAngle": 5
+        },
+        {
+            "type": "m",
+            "servo": 4,
+            "speed": 1,
+            "finalAngle": 5
+        },
+        {
+            "type": "m",
+            "servo": 5,
+            "speed": 1,
+            "finalAngle": 5
+        },
+        {
+            "type": "m",
+            "servo": 6,
+            "speed": 1,
+            "finalAngle": 5
+        },
+        {
+            "type": "m",
+            "servo": 7,
+            "speed": 1,
+            "finalAngle": 5
+        },
+        {
+            "type": "m",
+            "servo": 8,
+            "speed": 1,
+            "finalAngle": 5
+        },
+        {
+            "type": "m",
+            "servo": 9,
+            "speed": 1,
+            "finalAngle": 5
+        },
+        {
+            "type": "m",
+            "servo": 10,
+            "speed": 1,
+            "finalAngle": 5
+        },
+        {
+            "type": "m",
+            "servo": 11,
+            "speed": 1,
+            "finalAngle": 5
+        },
+        {
+            "type": "m",
+            "servo": 12,
+            "speed": 1,
+            "finalAngle": 5
+        },
+        {
+            "type": "m",
+            "servo": 13,
+            "speed": 1,
+            "finalAngle": 5
+        },
+        {
+            "type": "m",
+            "servo": 14,
+            "speed": 1,
+            "finalAngle": 5
+        },
+        {
+            "type": "m",
+            "servo": 15,
+            "speed": 1,
+            "finalAngle": 5
+        }
+    ]
+}

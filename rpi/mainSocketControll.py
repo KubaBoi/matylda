@@ -4,6 +4,6 @@ from animationScripts.animationManager import AnimationManager
 
 controller = ServoController(16)
 animationManager = AnimationManager(controller)
-server = Server(controller, animationManager)
+server = Server(animationManager)
 
 server.serveForever()

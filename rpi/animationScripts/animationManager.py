@@ -7,6 +7,39 @@ class AnimationManager:
     def __init__(self, servoController):
         self.controller = servoController
 
+    def doRequest(self, data):
+        answer = []
+
+        type = data["type"] # a/m
+
+        if (type == "m"):
+            requests = data["requests"] # list of moves
+            
+            for r in requests:
+                req_type = r["type"]
+                index = r["servo"]
+
+                if (req_type == "g"): # get angle
+                    get = {}
+                    get["servo"] = index
+                    get["angle"] = self.controller.getAngle(index)
+                    answer.append(get)
+                
+                else:
+                    speed = r["speed"]
+                    angle = r["finalAngle"]
+                    
+                    if (req_type == "m"): # set move
+                        self.controller.setMove(index, speed, angle)
+                    elif (req_type == "s"): # set angle
+                        self.controller.setAngle(index, angle)
+
+            self.controller.tick()
+
+        elif (type == "a"):
+            self.animationManager.createAnimation(data)
+            self.animationManager.runAnimation()
+
     def createAnimation(self, data):
         self.animations = []
 

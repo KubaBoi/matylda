@@ -5,8 +5,7 @@ import json
 import socket
 
 class Server:
-    def __init__(self, servoController, animationManager):
-        self.controller = servoController
+    def __init__(self, animationManager):
         self.animationManager = animationManager
 
     def serveForever(self):
@@ -40,7 +39,7 @@ class Server:
                     decoded = data.decode("utf-8")
                     request = json.loads(decoded) # array of recieved requests
 
-                    answer = self.readRequests(request)
+                    answer = self.animationManager.doRequest(request)
 
                     conn.sendall(bytes(json.dumps(answer), "utf-8"))
 
@@ -51,36 +50,4 @@ class Server:
                 conn, addr = s.accept()
                 print("Connected by", addr)
 
-    def readRequests(self, request):
-        answer = [] # answer in case of "g"
-                    
-        type = request["type"] # a/m
-
-        if (type == "m"):
-            requests = request["requests"] # list of moves
-            
-            for r in requests:
-                req_type = r["type"]
-                index = r["servo"]
-                speed = r["speed"]
-                angle = r["finalAngle"]
-                
-                if (req_type == "m"): # set move
-                    self.controller.setMove(index, speed, angle)
-                elif (req_type == "s"): # set angle
-                    self.controller.setAngle(index, angle)
-                elif (req_type == "g"): # get angle
-                    get = {}
-                    get["servo"] = index
-                    get["angle"] = self.controller.getAngle(index)
-                    answer.append(get)
-
-            self.controller.tick()
-
-        elif (type == "a"):
-            print("ANIMATION")
-            self.animationManager.createAnimation(request)
-            self.animationManager.runAnimation()
-
-        return answer
 
