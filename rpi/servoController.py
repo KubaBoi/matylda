@@ -22,6 +22,7 @@ class ServoController:
 
     def testServo(self, index):
         ang = self.getAngle(index)
+        print(ang)
         if (ang != None):
             print(f"Servo {index} is OK")
         else:
