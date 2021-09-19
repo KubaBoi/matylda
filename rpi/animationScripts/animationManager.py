@@ -37,8 +37,8 @@ class AnimationManager:
             self.controller.tick()
 
         elif (type == "a"):
-            self.animationManager.createAnimation(data)
-            self.animationManager.runAnimation()
+            self.createAnimation(data)
+            self.runAnimation()
 
         return answer
 
