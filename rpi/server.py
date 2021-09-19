@@ -15,9 +15,16 @@ class Server:
         self.PORT = 55573
 
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        s.bind((self.HOST, self.PORT))
-        s.listen(5)
-        print("Running...")
+        while True:
+            try:
+                s.bind((self.HOST, self.PORT))
+                s.listen(5)
+                print("Running...")
+                break
+            except Exception as e:
+                print("Connection is old. Turn of controll script.")
+                time.sleep(1000)
+
 
         conn, addr = s.accept()
         print("Connected by", addr)
