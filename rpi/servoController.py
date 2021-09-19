@@ -21,9 +21,10 @@ class ServoController:
                 servo.tick()
 
     def testServo(self, index):
+        self.setAngle(index, 5)
         ang = self.getAngle(index)
         print(ang)
-        if (ang != None):
+        if (ang < 300):
             print(f"Servo {index} is OK")
         else:
             print(f"Servo {index} is NOT OK")
