@@ -22,6 +22,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
                 req = r.split(",")
 
                 data = {}
+                
                 data["type"] = req[0]
                 data["servo"] = int(req[1])
                 data["speed"] = float(req[2])
