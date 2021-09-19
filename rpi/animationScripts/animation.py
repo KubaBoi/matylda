@@ -48,7 +48,7 @@ class Animation:
         return True
 
     def doWaitUntil(self, step):
-        self.servo.printServoInfo(f"Waiting for {step.otherServo.servoInfo} to have angle: {step.angle}")
+        self.servo.printServoInfo(f"Waiting for {step.otherServo.servoInfo()} to have angle: {step.angle}")
 
         if (step.angle != step.otherServo.getAngle()):
             return False
