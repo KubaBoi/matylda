@@ -21,7 +21,7 @@
                 {
                     "type": "m",
                     "speed": 0.1,
-                    "finalAngle": 10
+                    "finalAngle": 5
                 }
             ]
         },

@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+from colors import bcolors as bc
+
 class Servo:
     def __init__(self, servo, pin):
         self.servo = servo
@@ -21,7 +23,7 @@ class Servo:
     def tick(self):
         if (self.isActive()):
             if (self.getAngle() == self.finalAngle):
-                self.printServoInfo("STOP")
+                self.printServoInfo(f"{bc.OKGREEN}STOP{bc.ENDC}")
                 self.active = False
 
             else:
@@ -38,16 +40,16 @@ class Servo:
         return round(self.servo.angle)
 
     def addAngle(self, value):
-        self.printServoInfo(f"Adding: {value}")
+        self.printServoInfo(f"{bc.OKCYAN}Adding: {value}{bc.ENDC}")
         val = self.getAngle() + value
         self.servo.angle = val
 
     def setAngle(self, value):
-        self.printServoInfo(f"Setting: {value}")
+        self.printServoInfo(f"{bc.OKCYAN}Setting: {value}{bc.ENDC}")
         self.servo.angle = value
 
     def printServoInfo(self, comment=""):
         print(self.servoInfo(comment)) 
 
     def servoInfo(self, comment=""):
-        return f"Servo: {self.pin} angle: {self.getAngle()} {comment}"
+        return f"{bc.BOLD}Servo: {self.pin} angle: {self.getAngle()}{bc.ENDC} {comment}"

@@ -1,3 +1,4 @@
+from colors import bcolors as bc
 
 class Animation:
     def __init__(self, servo):
@@ -41,14 +42,14 @@ class Animation:
         return True
 
     def doWait(self, step):
-        self.servo.printServoInfo(f"Waiting for {step.runTime}/{step.duration} ticks")
+        self.servo.printServoInfo(f"{bc.WARNING}Waiting for {step.runTime}/{step.duration} ticks{bc.ENDC}")
 
         if (step.runTime < step.duration):
             return False
         return True
 
     def doWaitUntil(self, step):
-        self.servo.printServoInfo(f"Waiting for {step.otherServo.servoInfo()} to have angle: {step.angle}")
+        self.servo.printServoInfo(f"{bc.WARNING}Waiting for {step.otherServo.servoInfo()} to have angle: {step.angle}{bc.ENDC}")
 
         if (step.angle != step.otherServo.getAngle()):
             return False

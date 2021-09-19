@@ -3,6 +3,7 @@ import time
 from adafruit_servokit import ServoKit
 import json
 import socket
+from colors import bcolors as bc
 
 class Server:
     def __init__(self, animationManager):
@@ -18,16 +19,15 @@ class Server:
             try:
                 s.bind((self.HOST, self.PORT))
                 s.listen(5)
-                print("Running...")
+                print(f"{bc.OKCYAN}Running...{bc.ENDC}")
                 break
             except Exception as e:
-                print("Connection is old. Turn of controll script.")
+                print(f"{bc.WARNING}Connection is old. Turn of controll script.{bc.ENDC}")
                 time.sleep(2)
 
 
         conn, addr = s.accept()
-        print("Connected by", addr)
-        i = 0
+        print(f"{bc.HEADER}Connected by {addr}{bc.ENDC}")
 
         while True:
             try:
@@ -44,10 +44,10 @@ class Server:
                     conn.sendall(bytes(json.dumps(answer), "utf-8"))
 
             except Exception as e:
-                print("Disconnected by", addr)
-                print(str(e))
-                print("Waiting...")
+                print(f"{bc.WARNING}Disconnected by {addr}{bc.ENDC}")
+                print(f"{bc.FAIL}{str(e)}{bc.ENDC}")
+                print(f"{bc.OKCYAN}Waiting...{bc.ENDC}")
                 conn, addr = s.accept()
-                print("Connected by", addr)
+                print(f"{bc.OKCYAN}Connected by {addr}{bc.OKCYAN}")
 
 
