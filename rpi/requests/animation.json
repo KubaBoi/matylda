@@ -16,7 +16,7 @@
                 {
                     "type": "wu",
                     "servo": 1,
-                    "angle": 40
+                    "angle": 150
                 },
                 {
                     "type": "m",
@@ -29,11 +29,6 @@
             "servo": 1,
             "moves": [
                 {
-                    "type": "m",
-                    "speed": 0.1,
-                    "finalAngle": 50
-                },
-                {
                     "type": "wu",
                     "servo": 0,
                     "angle": 150
@@ -41,7 +36,7 @@
                 {
                     "type": "m",
                     "speed": 0.1,
-                    "finalAngle": 40
+                    "finalAngle": 150
                 }
             ]
         }

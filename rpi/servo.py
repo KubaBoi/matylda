@@ -47,4 +47,7 @@ class Servo:
         self.servo.angle = value
 
     def printServoInfo(self, comment=""):
-        print(f"Servo: {self.pin} angle: {self.getAngle()} {comment}") 
+        print(self.servoInfo(comment)) 
+
+    def servoInfo(self, comment=""):
+        return f"Servo: {self.pin} angle: {self.getAngle()} {comment}"
